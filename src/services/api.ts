@@ -17,6 +17,18 @@ export const getPokemon = async (nameOrId: string | number): Promise<Pokemon> =>
   return response.data;
 };
 
+export const getAllPokemons = async (): Promise<Pokemon[]> => {
+  // This limit should be high enough to get all Pokémon for client-side filtering.
+  // The PokeAPI has around 1300 Pokémon as of now.
+  const response = await api.get<PokemonListResponse>('/pokemon?limit=1500');
+  const pokemonDetails = await Promise.all(
+    response.data.results.map(pokemon => getPokemon(pokemon.name))
+  );
+  // Sort by ID by default
+  pokemonDetails.sort((a, b) => a.id - b.id);
+  return pokemonDetails;
+};
+
 export interface SearchParams {
   query: string;
   type?: string;

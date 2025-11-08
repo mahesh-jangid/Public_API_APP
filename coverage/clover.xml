@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1762594189794" clover="3.2.0">
-  <project timestamp="1762594189795" name="All files">
-    <metrics statements="351" coveredstatements="56" conditionals="183" coveredconditionals="27" methods="114" coveredmethods="20" elements="648" coveredelements="103" complexity="0" loc="351" ncloc="351" packages="5" files="20" classes="20"/>
+<coverage generated="1762606735126" clover="3.2.0">
+  <project timestamp="1762606735126" name="All files">
+    <metrics statements="370" coveredstatements="56" conditionals="186" coveredconditionals="27" methods="122" coveredmethods="20" elements="678" coveredelements="103" complexity="0" loc="370" ncloc="370" packages="6" files="21" classes="21"/>
     <package name="src">
-      <metrics statements="59" coveredstatements="2" conditionals="24" coveredconditionals="0" methods="12" coveredmethods="0"/>
+      <metrics statements="61" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="13" coveredmethods="0"/>
       <file name="App.tsx" path="D:\2nd Assignments\newcmpany\publicapi\src\App.tsx">
-        <metrics statements="52" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="54" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="13" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
@@ -15,49 +15,51 @@
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
-        <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="74" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="78" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="3"/>
         <line num="79" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
-        <line num="89" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="93" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="180" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="298" count="0" type="stmt"/>
-        <line num="306" count="0" type="stmt"/>
-        <line num="307" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="184" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="290" count="0" type="stmt"/>
+        <line num="299" count="0" type="stmt"/>
+        <line num="308" count="0" type="stmt"/>
+        <line num="309" count="0" type="stmt"/>
       </file>
       <file name="main.tsx" path="D:\2nd Assignments\newcmpany\publicapi\src\main.tsx">
         <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -242,9 +244,9 @@
         <line num="87" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
-        <line num="157" count="0" type="stmt"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
       </file>
       <file name="SearchBar.tsx" path="D:\2nd Assignments\newcmpany\publicapi\src\components\SearchBar.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
@@ -311,7 +313,7 @@
       </file>
     </package>
     <package name="src.hooks">
-      <metrics statements="76" coveredstatements="9" conditionals="32" coveredconditionals="0" methods="26" coveredmethods="4"/>
+      <metrics statements="77" coveredstatements="9" conditionals="31" coveredconditionals="0" methods="28" coveredmethods="4"/>
       <file name="useDebounce.ts" path="D:\2nd Assignments\newcmpany\publicapi\src\hooks\useDebounce.ts">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -325,47 +327,48 @@
         <line num="16" count="8" type="stmt"/>
       </file>
       <file name="usePokemons.ts" path="D:\2nd Assignments\newcmpany\publicapi\src\hooks\usePokemons.ts">
-        <metrics statements="40" coveredstatements="0" conditionals="19" coveredconditionals="0" methods="13" coveredmethods="0"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="115" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="123" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="126" count="0" type="stmt"/>
-        <line num="127" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="129" count="0" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="153" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="155" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="156" count="0" type="stmt"/>
-        <line num="158" count="0" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="160" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="172" count="0" type="stmt"/>
-        <line num="173" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="174" count="0" type="stmt"/>
-        <line num="175" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="181" count="0" type="cond" truecount="0" falsecount="5"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="202" count="0" type="stmt"/>
-        <line num="203" count="0" type="stmt"/>
-        <line num="205" count="0" type="stmt"/>
+        <metrics statements="41" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
       </file>
       <file name="useSort.ts" path="D:\2nd Assignments\newcmpany\publicapi\src\hooks\useSort.ts">
         <metrics statements="27" coveredstatements="0" conditionals="13" coveredconditionals="0" methods="9" coveredmethods="0"/>
@@ -396,6 +399,28 @@
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="47" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages">
+      <metrics statements="16" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="PokemonDetailsPage.tsx" path="D:\2nd Assignments\newcmpany\publicapi\src\pages\PokemonDetailsPage.tsx">
+        <metrics statements="16" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.services">

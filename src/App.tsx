@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { 
   ThemeProvider, 
   CssBaseline, 
@@ -39,6 +39,23 @@ const queryClient = new QueryClient({
   },
 });
 
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Cleanup function to clear the timeout if value changes
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
 function PokemonListContent() {
   const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
@@ -46,6 +63,8 @@ function PokemonListContent() {
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [sortBy, setSortBy] = useState<'name' | 'id' | 'attack'>('id');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
   
   const { 
     pokemons, 
@@ -59,10 +78,9 @@ function PokemonListContent() {
   } = usePokemonList();
   const { favorites } = useFavorites();
 
-  const handleSearch = (value: string) => {
-    setSearchQuery(value);
-    setApiSearchQuery(value);
-  };
+  useEffect(() => {
+    setApiSearchQuery(debouncedSearchQuery);
+  }, [debouncedSearchQuery, setApiSearchQuery]);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -115,7 +133,7 @@ function PokemonListContent() {
         }}
       >
         <Box sx={{ flex: { xs: '1', md: '1 1 50%' } }}>
-          <SearchBar value={searchQuery} onChange={handleSearch} />
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </Box>
         <Box 
           sx={{ 
@@ -289,7 +307,7 @@ function PokemonListContent() {
             viewMode={viewMode}
             onPokemonClick={(id) => navigate(`/pokemon/${id}`)}
             onLoadMore={loadMore}
-            hasMore={hasMore && sortBy === 'id' && tabValue === 0}
+            hasMore={hasMore && sortBy === 'id' && tabValue === 0 && !debouncedSearchQuery && !selectedType}
             isLoading={isLoading}
             isFetchingMore={isFetchingMore}
           />

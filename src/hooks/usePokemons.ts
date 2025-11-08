@@ -1,86 +1,58 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useState, useMemo } from 'react';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import type { Pokemon } from '../types/pokemon';
-import { getPokemon, searchPokemons } from '../services/api';
-import { useDebounce } from './useDebounce';
+import { getPokemon, searchPokemons, getAllPokemons } from '../services/api';
 import type { PokemonType } from '../components/TypeFilter';
 
 const ITEMS_PER_PAGE = 20;
 
-export function usePokemonList(initialLimit = ITEMS_PER_PAGE) {
-  const [offset, setOffset] = useState(0);
+export function usePokemonList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<PokemonType | ''>('');
-  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const debouncedSearch = useDebounce(searchQuery, 300);
-  const debouncedType = useDebounce(selectedType, 300);
 
-  const {
-    data: newPokemonList = [] as Pokemon[],
-    isLoading: isNewDataLoading,
-    error,
-    isFetching
-  } = useQuery<Pokemon[]>({
-    queryKey: ['pokemons', offset, initialLimit, debouncedSearch, debouncedType],
-    queryFn: () => searchPokemons({ 
-      query: debouncedSearch, 
-      type: debouncedType, 
-      limit: initialLimit,
-      offset: offset
-    }),
-    placeholderData: (previousData) => previousData,
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
-    retry: 2,
-    gcTime: 1000 * 60 * 10 // Keep in cache for 10 minutes
+  // Fetch all pokemons once and cache them. This is for client-side search/filter.
+  const { data: allPokemons, isLoading: isAllLoading } = useQuery<Pokemon[]>({
+    queryKey: ['allPokemons'],
+    queryFn: getAllPokemons,
+    staleTime: Infinity,
   });
 
-  // Update allPokemons when new data arrives
-  useEffect(() => {
-    if (offset === 0) {
-      setAllPokemons(newPokemonList);
-    } else if (newPokemonList.length > 0) {
-      setAllPokemons(prev => {
-        // Remove duplicates by name
-        const existingNames = new Set(prev.map(p => p.name));
-        const uniqueNew = newPokemonList.filter(p => !existingNames.has(p.name));
-        return [...prev, ...uniqueNew];
-      });
-    }
-  }, [newPokemonList, offset]);
+  // Infinite query for paginated data
+  const { 
+    data, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage, 
+    isLoading: isInfiniteLoading,
+    error,
+  } = useInfiniteQuery<Pokemon[]>({
+    queryKey: ['pokemons'],
+    queryFn: ({ pageParam = 0 }) => searchPokemons({ query: '', limit: ITEMS_PER_PAGE, offset: pageParam as number }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length < ITEMS_PER_PAGE) return undefined;
+      return allPages.length * ITEMS_PER_PAGE;
+    },
+    enabled: !searchQuery && !selectedType, // Only run this query when not searching/filtering
+  });
 
-  // Reset when search or type changes
-  useEffect(() => {
-    setOffset(0);
-    setAllPokemons([]);
-  }, [debouncedSearch, debouncedType]);
-
-  // Track loading state changes
-  useEffect(() => {
-    if (isFetching && offset > 0) {
-      setIsLoadingMore(true);
-    } else if (!isFetching) {
-      // Add a small delay to prevent rapid state updates
-      const timeoutId = setTimeout(() => {
-        setIsLoadingMore(false);
-      }, 100);
-      return () => clearTimeout(timeoutId);
+  const pokemons = useMemo(() => {
+    if (searchQuery || selectedType) {
+      return (allPokemons || []).filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (!selectedType || p.types.some(t => t.type.name === selectedType))
+      );
     }
-  }, [isFetching, offset]);
-
-  const loadMore = useCallback(() => {
-    if (!isFetching && newPokemonList.length >= initialLimit) {
-      setOffset(prevOffset => prevOffset + initialLimit);
-    }
-  }, [isFetching, newPokemonList.length, initialLimit]);
+    return data?.pages.flat() ?? [];
+  }, [data, allPokemons, searchQuery, selectedType]);
 
   return {
-    pokemons: allPokemons,
-    isLoading: isNewDataLoading && offset === 0,
+    pokemons,
+    isLoading: (isInfiniteLoading && !data) || (isAllLoading && (!!searchQuery || !!selectedType)),
     error,
-    loadMore,
-    hasMore: newPokemonList.length >= initialLimit,
-    isFetchingMore: isLoadingMore,
+    loadMore: fetchNextPage,
+    hasMore: !searchQuery && !selectedType && hasNextPage,
+    isFetchingMore: isFetchingNextPage,
     isError: !!error,
     searchQuery,
     setSearchQuery,
