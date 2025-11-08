@@ -6,6 +6,7 @@ A modern React application that lets users explore Pokémon using the PokéAPI w
 
 - **Search & Filter**
   - Global search with debouncing (300ms)
+  - Common Sorting for both Tabs Data taking care of infinite scroll enable/disable
   - Filter by Pokémon type (18 different types)
   - Filter by favorites
   - Combine filters for advanced search
