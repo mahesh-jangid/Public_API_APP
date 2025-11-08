@@ -12,7 +12,7 @@ A modern React application that lets users explore Pokémon using the PokéAPI w
   - Clean and responsive UI
 
 - **List & Detail Views**
-  - Grid layout with Pokémon cards
+  - Grid/List layout with Pokémon cards
   - Detailed view with stats and abilities
   - High-quality official artwork
 
@@ -114,6 +114,3 @@ This project uses the [PokéAPI](https://pokeapi.co/) which provides comprehensi
 4. Push to the branch: `git push origin feature/my-feature`
 5. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details
