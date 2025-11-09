@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { 
   ThemeProvider, 
   CssBaseline, 
@@ -13,22 +13,27 @@ import {
   IconButton,
   Tooltip
 } from '@mui/material';
-import { FavoritesList } from './components/FavoritesList';
 import { Sort, ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import { ViewToggle, type ViewMode } from './components/ViewToggle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { SearchBar } from './components/SearchBar';
-import { TypeFilter } from './components/TypeFilter';
 import type { Pokemon } from './types/pokemon';
 import { Loading } from './components/Loading';
-import { PokemonDetailsPage } from './pages/PokemonDetailsPage';
 import { usePokemonList } from './hooks/usePokemons';
 import { useNavigate } from 'react-router-dom';
 import { FavoritesProvider, useFavorites } from './context/FavoritesContext';
 import { theme } from './theme';
-import { ScrollableGrid } from './components/ScrollableGrid';
+
+// Eager loaded components (for essential UI)
+import { SearchBar } from './components/SearchBar';
+import { TypeFilter } from './components/TypeFilter';
+
+// Lazy loaded components (for heavy content)
+const FavoritesList = lazy(() => import('./components/FavoritesList').then(module => ({ default: module.FavoritesList })));
+const ScrollableGrid = lazy(() => import('./components/ScrollableGrid').then(module => ({ default: module.ScrollableGrid })));
+
+const PokemonDetailsPage = lazy(() => import('./pages/PokemonDetailsPage').then(module => ({ default: module.PokemonDetailsPage })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -108,8 +113,6 @@ function PokemonListContent() {
       return sortDirection === 'asc' ? comparison : -comparison;
     });
   }, [pokemons, sortBy, sortDirection]);
-
-  if (isLoading) return <Loading />;
 
   return (
     <Box
@@ -302,21 +305,25 @@ function PokemonListContent() {
         }}
       >
         {tabValue === 0 ? (
-          <ScrollableGrid
-            pokemons={sortedPokemons}
-            viewMode={viewMode}
-            onPokemonClick={(id) => navigate(`/pokemon/${id}`)}
-            onLoadMore={loadMore}
-            hasMore={hasMore && sortBy === 'id' && tabValue === 0 && !debouncedSearchQuery && !selectedType}
-            isLoading={isLoading}
-            isFetchingMore={isFetchingMore}
-          />
+          <Suspense fallback={<Loading />}>
+            <ScrollableGrid
+              pokemons={sortedPokemons}
+              viewMode={viewMode}
+              onPokemonClick={(id) => navigate(`/pokemon/${id}`)}
+              onLoadMore={loadMore}
+              hasMore={hasMore && sortBy === 'id' && tabValue === 0 && !debouncedSearchQuery && !selectedType}
+              isLoading={isLoading}
+              isFetchingMore={isFetchingMore}
+            />
+          </Suspense>
         ) : (
-          <FavoritesList
-            pokemons={sortedPokemons}
-            onPokemonClick={(id) => navigate(`/pokemon/${id}`)}
-            viewMode={viewMode}
-          />
+          <Suspense fallback={<Loading />}>
+            <FavoritesList
+              pokemons={sortedPokemons}
+              onPokemonClick={(id) => navigate(`/pokemon/${id}`)}
+              viewMode={viewMode}
+            />
+          </Suspense>
         )}
       </Box>
     </Box>
@@ -404,10 +411,12 @@ export default function App() {
                   boxSizing: 'border-box'
                 }}
               >
-                <Routes>
-                  <Route path="/" element={<PokemonListContent />} />
-                  <Route path="/pokemon/:id" element={<PokemonDetailsPage />} />
-                </Routes>
+                <Suspense fallback={<Loading />}>
+                  <Routes>
+                    <Route path="/" element={<PokemonListContent />} />
+                    <Route path="/pokemon/:id" element={<PokemonDetailsPage />} />
+                  </Routes>
+                </Suspense>
               </Box>
             </Box>
           </BrowserRouter>

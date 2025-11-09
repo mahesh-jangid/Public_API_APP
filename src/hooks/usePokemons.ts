@@ -10,11 +10,12 @@ export function usePokemonList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<PokemonType | ''>('');
 
-  // Fetch all pokemons once and cache them. This is for client-side search/filter.
+  // Fetch all pokemons lazily - only when needed for search/filter
   const { data: allPokemons, isLoading: isAllLoading } = useQuery<Pokemon[]>({
     queryKey: ['allPokemons'],
     queryFn: getAllPokemons,
     staleTime: Infinity,
+    enabled: !!searchQuery || !!selectedType, // Only fetch when searching or filtering
   });
 
   // Infinite query for paginated data
@@ -48,7 +49,8 @@ export function usePokemonList() {
 
   return {
     pokemons,
-    isLoading: (isInfiniteLoading && !data) || (isAllLoading && (!!searchQuery || !!selectedType)),
+    isLoading: (!searchQuery && !selectedType && isInfiniteLoading && !data) || 
+                ((!!searchQuery || !!selectedType) && isAllLoading && !allPokemons),
     error,
     loadMore: fetchNextPage,
     hasMore: !searchQuery && !selectedType && hasNextPage,
